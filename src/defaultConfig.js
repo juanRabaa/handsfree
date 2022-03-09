@@ -172,26 +172,26 @@ export default {
     minTrackingConfidence: 0.5
   },
 
-  handpose: {
-    enabled: false,
+  // handpose: {
+  //   enabled: false,
 
-    // The backend to use: 'webgl' or 'wasm'
-    // 🚨 Currently only webgl is supported
-    backend: 'webgl',
+  //   // The backend to use: 'webgl' or 'wasm'
+  //   // 🚨 Currently only webgl is supported
+  //   backend: 'webgl',
 
-    // How many frames to go without running the bounding box detector. 
-    // Set to a lower value if you want a safety net in case the mesh detector produces consistently flawed predictions.
-    maxContinuousChecks: Infinity,
+  //   // How many frames to go without running the bounding box detector. 
+  //   // Set to a lower value if you want a safety net in case the mesh detector produces consistently flawed predictions.
+  //   maxContinuousChecks: Infinity,
 
-    // Threshold for discarding a prediction
-    detectionConfidence: 0.8,
+  //   // Threshold for discarding a prediction
+  //   detectionConfidence: 0.8,
 
-    // A float representing the threshold for deciding whether boxes overlap too much in non-maximum suppression. Must be between [0, 1]
-    iouThreshold: 0.3,
+  //   // A float representing the threshold for deciding whether boxes overlap too much in non-maximum suppression. Must be between [0, 1]
+  //   iouThreshold: 0.3,
 
-    // A threshold for deciding when to remove boxes based on score in non-maximum suppression.
-    scoreThreshold: 0.75
-  },
+  //   // A threshold for deciding when to remove boxes based on score in non-maximum suppression.
+  //   scoreThreshold: 0.75
+  // },
 
   plugin: {}
 }

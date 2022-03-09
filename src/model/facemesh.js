@@ -10,7 +10,7 @@ export default class FacemeshModel extends BaseModel {
   loadDependencies (callback) {
     // Just load utils on client
     if (this.handsfree.config.isClient) {
-      this.loadDependency(`${this.handsfree.config.assetsPath}/@mediapipe/drawing_utils.js`, () => {
+      this.loadDependency(`${this.handsfree.config.assetsPath}/node_modules/@mediapipe/drawing_utils/drawing_utils.js`, () => {
         this.onWarmUp(callback)
       }, !!window.drawConnectors)
 
@@ -41,7 +41,7 @@ export default class FacemeshModel extends BaseModel {
       })
 
       // Load the hands camera module
-      this.loadDependency(`${this.handsfree.config.assetsPath}/@mediapipe/drawing_utils.js`, null, !!window.drawConnectors)
+      this.loadDependency(`${this.handsfree.config.assetsPath}/node_modules/@mediapipe/drawing_utils/drawing_utils.js`, null, !!window.drawConnectors)
     })
   }
 

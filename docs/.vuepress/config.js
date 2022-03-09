@@ -88,8 +88,8 @@ module.exports = {
         path: '/ref/model/',
         collapsable: false,
         children: [
-          ['/ref/model/hands.md', '🖐 Hands (2D)'],
-          ['/ref/model/handpose.md', '🖐 Handpose (3D)'],
+          ['/ref/model/hands.md', '🖐 Hands'],
+          // ['/ref/model/handpose.md', '🖐 Handpose (3D)'],
           ['/ref/model/facemesh.md', '😏 FaceMesh'],
           ['/ref/model/pose.md', '🤸‍♀️ Pose'],
           ['/ref/model/weboji.md', '😉 Weboji'],

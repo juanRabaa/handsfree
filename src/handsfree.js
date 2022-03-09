@@ -37,7 +37,7 @@
 import HandsModel from './model/hands'
 import FacemeshModel from './model/facemesh'
 import PoseModel from './model/pose'
-import HandposeModel from './model/handpose'
+// import HandposeModel from './model/handpose'
 import WebojiModel from './model/weboji'
 import PluginBase from './plugin/base.js'
 import GestureFingerpose from './gesture/Fingerpose.js'
@@ -170,13 +170,13 @@ class Handsfree {
       hands: {},
       facemesh: {},
       pose: {},
-      handpose: {}
+      // handpose: {}
     }
     this.model.weboji = new WebojiModel(this, this.config.weboji)
     this.model.hands = new HandsModel(this, this.config.hands)
     this.model.pose = new PoseModel(this, this.config.pose)
     this.model.facemesh = new FacemeshModel(this, this.config.facemesh)
-    this.model.handpose = new HandposeModel(this, this.config.handpose)
+    // this.model.handpose = new HandposeModel(this, this.config.handpose)
   }
 
   /**
@@ -208,9 +208,9 @@ class Handsfree {
     if (typeof config.pose === 'boolean') {
       config.pose = {enabled: config.pose}
     }
-    if (typeof config.handpose === 'boolean') {
-      config.handpose = {enabled: config.handpose}
-    }
+    // if (typeof config.handpose === 'boolean') {
+    //   config.handpose = {enabled: config.handpose}
+    // }
 
     // Map plugin booleans to objects
     config.plugin && Object.keys(config.plugin).forEach(plugin => {
@@ -247,7 +247,7 @@ class Handsfree {
     this.debug.$video.height = this.config.setup.video.height
 
     // Run enable/disable methods on changed models
-    ;['hands', 'facemesh', 'pose', 'handpose', 'weboji'].forEach(model => {
+    ;['hands', 'facemesh', 'pose', /*'handpose'*/, 'weboji'].forEach(model => {
       let wasEnabled = this.model[model].enabled
       this.config[model] = this.model[model].config = merge({}, this.model[model].config, config[model])
 
@@ -406,7 +406,7 @@ class Handsfree {
     // Render video behind everything else
     // - Note: Weboji uses its own camera
     if (this.isDebugging) {
-      const isUsingCamera = ['hands', 'pose', 'handpose', 'facemesh'].find(model => {
+      const isUsingCamera = ['hands', 'pose', /*'handpose'*/, 'facemesh'].find(model => {
         if (this.model[model].enabled) {
           return model
         }
@@ -877,7 +877,7 @@ class Handsfree {
     }
 
     // The video canvas is used to display the video
-    ;['video', 'weboji', 'facemesh', 'pose', 'hands', 'handpose'].forEach(model => {
+    ;['video', 'weboji', 'facemesh', 'pose', 'hands', /*'handpose'*/].forEach(model => {
       this.debug.$canvas[model] = {}
       this.debug.context[model] = {}
       
@@ -898,7 +898,7 @@ class Handsfree {
       this.debug.$wrap.appendChild(this.debug.$canvas[model])
 
       // Context
-      if (['weboji', 'handpose'].includes(model)) {
+      if (['weboji', /*'handpose'*/].includes(model)) {
         this.debug.$canvas[model].classList.add('handsfree-canvas-webgl')
       } else {
         this.debug.context[model] = this.debug.$canvas[model].getContext('2d')  
