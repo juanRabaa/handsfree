@@ -104,6 +104,7 @@ export default class HandsModel extends BaseModel {
   forceHandedness (results) {
     // Empty landmarks
     results.landmarks = [[], [], [], []]
+    results.worldLandmarks = [[], [], [], []]
     results.landmarksVisible = [false, false, false, false]
     if (!results.multiHandLandmarks) {
       return results
@@ -122,6 +123,17 @@ export default class HandsModel extends BaseModel {
       results.landmarksVisible[hand] = true
     })
 
+    // Store world landmarks in correct index
+    results.multiHandWorldLandmarks.forEach((landmarks, n) => {
+      let hand
+      if (n < 2) {
+        hand = results.multiHandedness[n].label === 'Right' ? 0 : 1
+      } else {
+        hand = results.multiHandedness[n].label === 'Right' ? 2 : 3
+      }
+      results.worldLandmarks[hand] = landmarks
+    })
+
     return results
   }
 
@@ -132,16 +144,19 @@ export default class HandsModel extends BaseModel {
     results.multiHandLandmarks.forEach((hand, n) => {
       let x = 0
       let y = 0
+      let z = 0
       
       this.palmPoints.forEach(i => {
         x += hand[i].x
         y += hand[i].y
+        z += hand[i].z
       })
 
       x /= this.palmPoints.length
       y /= this.palmPoints.length
+      z /= this.palmPoints.length
       
-      results.multiHandLandmarks[n][21] = {x, y}
+      results.multiHandLandmarks[n][21] = {x, y, z}
     })
     
     return results

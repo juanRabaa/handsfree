@@ -75,7 +75,7 @@ handsfree.start()
 
 ### Hand Landmarks
 
-#### `.landmarks` and `.landmarksVisible`
+#### `.landmarks` (normalized 3D points)
 
 You can access the landmarks for each hand through:
 
@@ -85,15 +85,36 @@ handsfree.data.hands.landmarks
 
 // Left hand, person #1
 handsfree.data.hands.landmarks[0]
-// Right hand, person #1
-handsfree.data.hands.landmarks[1]
-// Left hand, person #2
-handsfree.data.hands.landmarks[2]
-// Right hand, person #2
-handsfree.data.hands.landmarks[3]
+// Right hand, person #1, thumb tip
+handsfree.data.hands.landmarks[1][4].x
+// Left hand, person #2, index tip
+handsfree.data.hands.landmarks[2][8].y
+// Right hand, person #2, ring tip
+handsfree.data.hands.landmarks[3][16].z
 ```
 
-Each of these has 22 `{x, y, z}` landmarks. To check if the hand is detected, you can use `handsfree.data.hands.landmarksVisible`:
+Each of these has 22 `{x, y, z}` landmarks. The `.x` and `.y` are normalized between [0, 1] (with 0 being the left/top edges of the image and 1 being right/bottom edges). `.z` is the distance from the center of the palm with a magnitude similar to `.x`.
+
+### `.worldLandmarks` (3D points measured in meters)
+
+This is similar to `.landmarks` but with real world coordinates, relative to the webcam. These points are measured in meters with the origin at the hand's center.
+
+```js
+// handIndex [0 - 3] An array of landmark points for each detected hands
+handsfree.data.hands.worldLandmarks
+
+// Left hand, person #1
+handsfree.data.hands.worldLandmarks[0]
+// Right hand, person #1, thumb tip
+handsfree.data.hands.worldLandmarks[1][4].x
+// Left hand, person #2, index tip
+handsfree.data.hands.worldLandmarks[2][8].y
+// Right hand, person #2, ring tip
+handsfree.data.hands.worldLandmarks[3][16].z
+```
+
+### `.landmarksVisible`
+To check if the hand is detected, you can use `handsfree.data.hands.landmarksVisible`:
 
 ```js
 // Left hand, person #1
@@ -106,9 +127,11 @@ handsfree.data.hands.landmarksVisible[2]
 handsfree.data.hands.landmarksVisible[3]
 ```
 
-#### Original data
+---
 
-It's not recommended to use these as the hands are not always in the correct index, however it's exposed here to provide backward compatibility for those switching to Handsfree.js from using MediaPipe Hands directly.
+### ⚠️ Accessing raw data
+
+It's not recommended to use these as the hands are not always in the "correct" index but rather in the order that they are detected, however it's exposed here to provide backward compatibility for those switching to Handsfree.js from using MediaPipe Hands directly.
 
 ```js
 // handIndex [0 - 3] An array of landmark points for each detected hands
@@ -128,6 +151,24 @@ handsfree.data.hands.multiHandLandmarks[0][0].y
 handsfree.data.hands.multiHandLandmarks[0][0].z
 ```
 
+```js
+// handIndex [0 - 3] An array of landmark points for each detected hands
+handsfree.data.hands.multiHandWorldLandmarks[handIndex] == [
+  // Landmark 0
+  {x, y, z},
+  // Landmark 1
+  {x, y, z},
+  // ...
+  // Landmark 20
+  {x, y, z}
+]
+
+// hand 0, landmark 0
+handsfree.data.hands.multiHandWorldLandmarks[0][0].x
+handsfree.data.hands.multiHandWorldLandmarks[0][0].y
+handsfree.data.hands.multiHandWorldLandmarks[0][0].z
+```
+
 ### Is it the right or left hand?
 
 ```js
@@ -143,6 +184,8 @@ handsfree.data.hands.multiHandedness[handIndex] == {
 handsfree.data.hands.multiHandedness[0].label
 handsfree.data.hands.multiHandedness[0].score
 ```
+
+---
 
 ### Examples of accessing the data
 
