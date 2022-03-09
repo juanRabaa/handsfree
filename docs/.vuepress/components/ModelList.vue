@@ -67,8 +67,8 @@ div.mt-md
         p
           router-link(to='/ref/model/pose.html') 📚 MediaPipe Pose documentation
         ul
-          li Full body mode with 33 2D pose landmarks
-          li Upper body mode with 25 2D upper pose landmarks
+          li 33 3D pose landmarks
+          li Optional body segmentation mask
           li 📅 Extra helpers and plugins coming soon
         div
           HandsfreeToggle.full-width.handsfree-hide-when-started-without-pose(text-off='Try Pose' text-on='Stop Pose' :opts='demo.pose' @stop='stop("pose")')
@@ -80,7 +80,7 @@ div.mt-md
             | Try Pose
 
     .col-6
-      Window(title="Model: TensorFlow Handpose")
+      Window(title="Model: Jeeliz Weboji")
         router-link(to='/ref/model/weboji.html')
           img(src='https://media.giphy.com/media/Iv2aSMS0QTy2P5JNCX/source.gif')
         p

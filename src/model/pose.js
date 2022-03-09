@@ -22,9 +22,9 @@ export default class PoseModel extends BaseModel {
     }
 
     // Load pose
-    this.loadDependency(`${this.handsfree.config.assetsPath}/@mediapipe/pose/pose.js`, () => {
+    this.loadDependency(`${this.handsfree.config.assetsPath}/node_modules/@mediapipe/pose/pose.js`, () => {
       this.api = new window.Pose({locateFile: file => {
-        return `${this.handsfree.config.assetsPath}/@mediapipe/pose/${file}`
+        return `${this.handsfree.config.assetsPath}/node_modules/@mediapipe/pose/${file}`
       }})
       this.api.setOptions(this.handsfree.config.pose)
       this.api.onResults(results => this.dataReceived(results))

@@ -155,14 +155,17 @@ export default {
   // Pose model
   pose: {
     enabled: false,
-    
-    // Outputs only the top 25 pose landmarks if true,
-    // otherwise shows all 33 full body pose landmarks
-    // - Note: Setting this to true may result in better accuracy 
-    upperBodyOnly: false,
 
+    // [0-2] Higher values are more accurate but slower
+    modelComplexity: 1,
+    
     // Helps reduce jitter over multiple frames if true
     smoothLandmarks: true,
+
+    // If true it also generates a segmentation map
+    enableSegmentation: false,
+    // Helps reduce jitter over multiple frames if true
+    smoothSegmentation: true,
 
     // Minimum confidence [0 - 1] for a person detection to be considered detected
     minDetectionConfidence: 0.5,

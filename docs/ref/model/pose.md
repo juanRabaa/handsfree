@@ -16,8 +16,8 @@ sidebarDepth: 2
     <Window title="Overview and basic demo">
       <section>
         <ul>
-          <li>🤸‍♀️ Full body mode with 33 2D pose landmarks</li>
-          <li>🤺 Upper body mode with 25 2D upper pose landmarks</li>
+          <li>🤸‍♀️33 3D pose landmarks</li>
+          <li>🤺 Optional body segmentation mask</li>
           <li>📅 Extra helpers and plugins coming soon</li>
         </ul>
         <p>This model doesn't come with any bonuses or plugins yet but they'll come soon. The API will remain exactly the same, so feel free to started with this model today!</p>
@@ -46,14 +46,17 @@ handsfree.start()
 const handsfree = new Handsfree({
   pose: {
     enabled: false,
-    
-    // Outputs only the top 25 pose landmarks if true,
-    // otherwise shows all 33 full body pose landmarks
-    // - Note: Setting this to true may result in better accuracy 
-    upperBodyOnly: false,
 
+    // [0-2] Higher values are more accurate but slower
+    modelComplexity: 1,
+    
     // Helps reduce jitter over multiple frames if true
     smoothLandmarks: true,
+
+    // If true it also generates a segmentation map
+    enableSegmentation: false,
+    // Helps reduce jitter over multiple frames if true
+    smoothSegmentation: true,
 
     // Minimum confidence [0 - 1] for a person detection to be considered detected
     minDetectionConfidence: 0.5,
@@ -73,23 +76,54 @@ handsfree.start()
 ![](https://google.github.io/mediapipe/images/mobile/pose_tracking_full_body_landmarks.png)
 <br><small>Image source, MediaPipe: [https://google.github.io/mediapipe/solutions/pose#pose-landmark-model-blazepose-tracker](https://google.github.io/mediapipe/solutions/pose#pose-landmark-model-blazepose-tracker)</small>
 
+#### `.poseLandmarks` (normalized 3D points)
+
+You can access the landmarks with:
+
 ```js
 // An array of landmark points for the face
 handsfree.data.pose.poseLandmarks == [
   // Landmark 0
-  {x, y, visibility},
+  {x, y, z, visibility},
   // Landmark 1
-  {x, y, visibility},
+  {x, y, z, visibility},
   // ...
   // Landmark 32
-  {x, y, visibility}
+  {x, y, z, visibility}
 ]
 
-// landmark 0
+// Nose
 handsfree.data.pose.poseLandmarks[0].x
 handsfree.data.pose.poseLandmarks[0].y
+handsfree.data.pose.poseLandmarks[0].z
 // The confidence in this pose landmark
 handsfree.data.pose.poseLandmarks[0].visibility
+```
+
+Each of these 33 landmarks are normalized to the video, where `0` represents top/left and `1` is bottom/right for `.x` and `.y`. The `.z` is normalized with the a similar magnitude as `.x`, and the depth is relative to the hips midpoint. `.visibility` is a range between `[0, 1]` that describes how likely that point is visible `[1]` or not `[0]`
+
+#### `.poseWorldLandmarks`
+
+This is like `.poseLandmarks` but where the points are measured in meters relative to the midpoint of the hips.
+
+```js
+// An array of landmark points for the face
+handsfree.data.pose.poseWorldLandmarks == [
+  // Landmark 0
+  {x, y, z, visibility},
+  // Landmark 1
+  {x, y, z, visibility},
+  // ...
+  // Landmark 32
+  {x, y, z, visibility}
+]
+
+// Nose
+handsfree.data.pose.poseWorldLandmarks[0].x
+handsfree.data.pose.poseWorldLandmarks[0].y
+handsfree.data.pose.poseWorldLandmarks[0].z
+// The confidence in this pose landmark
+handsfree.data.pose.poseWorldLandmarks[0].visibility
 ```
 
 ### Examples of accessing the data
