@@ -10,7 +10,8 @@
     "build:docs": "vuepress build docs",
     "build:extension": "vuepress build docs --dest build/extension",
     "fa:build": "node node_modules/vuepress-plugin-font-awesome/index.js --dest=docs",
-    "deploy": "npm publish && deploy.sh"
+    "deploy": "npm publish && deploy.sh",
+    "postinstall": "cd docs/.vuepress/public/handsfreejs && npm i"
   },
   "repository": {
     "type": "git",
