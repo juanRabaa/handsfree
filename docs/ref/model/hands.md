@@ -8,14 +8,14 @@ sidebarDepth: 2
     <p><img alt="A 3D model of a hand projected above a person's hand" src="https://media0.giphy.com/media/y4S6WFaCUWvqHL7UA8/giphy.gif" /></p>
     <ul>
       <li>Powered by <a href="https://www.npmjs.com/package/@mediapipe/hands">MediaPipe's Hands</a></li>
-      <li>Full <a href="https://google.github.io/mediapipe/solutions/hands.html">technical documentation</a></li>
+      <li>Full <a href="https://google.github.io/mediapipe/solutions/hands">technical documentation</a></li>
     </ul>
   </div>
   <div class="col-6">
     <Window title="Overview and basic demo">
       <section>
         <ul>
-          <li>🖐 22 2D hand landmarks</li>
+          <li>🖐 22 3D hand landmarks</li>
           <li>🖐🖐 Track up to 4 hands total</li>
         </ul>
         <p>This model includes dozens of <router-link to="/ref/plugin/pinchers/">Pinch Events</router-link> and helper styles to get you going quickly, along with a <router-link to="/ref/plugin/pinchScroll/">plugin for scrolling pages handsfree</router-link>.</p>
@@ -44,7 +44,16 @@ handsfree.start()
 const handsfree = new Handsfree({
   hands: {
     enabled: true,
+
+    // Model complexity [0, 1]
+    // Complexity of the hand landmark model: 0 or 1.
+    // Landmark accuracy as well as inference latency generally
+    //   go up with the model complexity
+    modelComplexity: 1,
+    
     // The maximum number of hands to detect [0 - 4]
+    // Minimum confidence value ([0.0, 1.0]) from the hand detection
+    //   model for the detection to be considered successful.
     maxNumHands: 2,
 
     // Minimum confidence [0 - 1] for a hand to be considered detected
@@ -84,7 +93,7 @@ handsfree.data.hands.landmarks[2]
 handsfree.data.hands.landmarks[3]
 ```
 
-Each of these has 22 `{x, y}` landmarks. To check if the hand is detected, you can use `handsfree.data.hands.landmarksVisible`:
+Each of these has 22 `{x, y, z}` landmarks. To check if the hand is detected, you can use `handsfree.data.hands.landmarksVisible`:
 
 ```js
 // Left hand, person #1
@@ -105,17 +114,18 @@ It's not recommended to use these as the hands are not always in the correct ind
 // handIndex [0 - 3] An array of landmark points for each detected hands
 handsfree.data.hands.multiHandLandmarks[handIndex] == [
   // Landmark 0
-  {x, y},
+  {x, y, z},
   // Landmark 1
-  {x, y},
+  {x, y, z},
   // ...
   // Landmark 20
-  {x, y}
+  {x, y, z}
 ]
 
 // hand 0, landmark 0
 handsfree.data.hands.multiHandLandmarks[0][0].x
 handsfree.data.hands.multiHandLandmarks[0][0].y
+handsfree.data.hands.multiHandLandmarks[0][0].z
 ```
 
 ### Is it the right or left hand?
@@ -165,7 +175,7 @@ document.addEventListener('handsfree-data', event => {
 })
 ```
 
-## Examples
+## Examples (coming soon)
 
 <!-- 🙌 Hi! If you'd like to add your project, just uncomment below with and replace the ALL_CAPS to your info. Thanks so much 🙏 -->
 
@@ -188,7 +198,7 @@ document.addEventListener('handsfree-data', event => {
 </div>
 -->
 
-<div class="row align-top">
+<!-- <div class="row align-top">
   <div class="col-6">
     <blockquote class="twitter-tweet"><p lang="en" dir="ltr">I remixed <a href="https://twitter.com/notwaldorf?ref_src=twsrc%5Etfw">@notwaldorf</a>&#39;s Piano Genie so that you can jam out with your fingers through a webcam 🖐🎹🖐<br><br>Try it on <a href="https://twitter.com/glitch?ref_src=twsrc%5Etfw">@Glitch</a>: <a href="https://t.co/CvrOboC5tV">https://t.co/CvrOboC5tV</a><br><br>Or see the source: <a href="https://t.co/ffWG92OEm2">https://t.co/ffWG92OEm2</a><br><br>Remixed by simply using the &quot;Pincher Plugin&quot; of Handsfree.js! <a href="https://twitter.com/hashtag/MediaPipe?src=hash&amp;ref_src=twsrc%5Etfw">#MediaPipe</a> <a href="https://twitter.com/hashtag/MadeWithTFJS?src=hash&amp;ref_src=twsrc%5Etfw">#MadeWithTFJS</a> <a href="https://t.co/lblUgzNl7N">pic.twitter.com/lblUgzNl7N</a></p>&mdash; Oz Ramos (@MIDIBlocks) <a href="https://twitter.com/MIDIBlocks/status/1359382512938541057?ref_src=twsrc%5Etfw">February 10, 2021</a></blockquote>
   </div>
@@ -215,7 +225,7 @@ document.addEventListener('handsfree-data', event => {
       If you've made something with this model I'd love to showcase it here! DM me <a href="https://twitter.com/midiblocks">on Twitter</a>, <a class="https://github.com/midiblocks/handsfree/edit/master/docs/ref/model/hands.md">make a pull request</a>, or <a href="https://discord.gg/JeevWjTEdu">find us on Discord</a>.  
     </Window>
   </div>
-</div>
+</div> -->
 
 ## See Also
 
