@@ -18,10 +18,10 @@ export default class FacemeshModel extends BaseModel {
     }
     
     // Load facemesh
-    this.loadDependency(`${this.handsfree.config.assetsPath}/@mediapipe/face_mesh/face_mesh.js`, () => {
+    this.loadDependency(`${this.handsfree.config.assetsPath}/node_modules/@mediapipe/face_mesh/face_mesh.js`, () => {
       // Configure model
       this.api = new window.FaceMesh({locateFile: file => {
-        return `${this.handsfree.config.assetsPath}/@mediapipe/face_mesh/${file}`
+        return `${this.handsfree.config.assetsPath}/node_modules/@mediapipe/face_mesh/${file}`
       }})
       this.api.setOptions(this.handsfree.config.facemesh)
       this.api.onResults(results => this.dataReceived(results))

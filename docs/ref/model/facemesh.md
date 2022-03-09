@@ -7,7 +7,7 @@ sidebarDepth: 2
 
 <div class="row align-top">
   <div class="col-6">
-    <p><img alt="A 3D model of a hand projected above a person's hand" src="https://media0.giphy.com/media/g2msiDwoLqabEMrmaL/giphy.gif" /></p>
+    <p><img src="https://media0.giphy.com/media/g2msiDwoLqabEMrmaL/giphy.gif" /></p>
     <ul>
       <li>Powered by <a href="https://www.npmjs.com/package/@mediapipe/face_mesh">MediaPipe's Face Mesh</a></li>
       <li>Full <a href="https://google.github.io/mediapipe/solutions/face_mesh.html">technical documentation</a></li>
@@ -17,7 +17,7 @@ sidebarDepth: 2
     <Window title="Overview and basic demo">
       <section>
         <ul>
-          <li>🙂 468 2D face landmarks</li>
+          <li>🙂 468 3D face landmarks</li>
           <li>😁😜 Track up to 4 faces at once</li>
           <li>📅 Extra helpers and plugins coming soon</li>
         </ul>
@@ -49,6 +49,11 @@ const handsfree = new Handsfree({
     enabled: true,
     // The maximum number of faces to detect [1 - 4]
     maxNumFaces: 1,
+
+    // Whether to further refine the landmark coordinates around the eyes and lips,
+    // and output additional landmarks around the irises by applying the
+    // Attention Mesh Model. 
+    refineLandmarks: false,
 
     // Minimum confidence [0 - 1] for a face to be considered detected
     minDetectionConfidence: 0.5,

@@ -144,6 +144,11 @@ export default {
     // The maximum number of faces to detect [1 - 4]
     maxNumFaces: 1,
 
+    // Whether to further refine the landmark coordinates around the eyes and lips,
+    // and output additional landmarks around the irises by applying the
+    // Attention Mesh Model. 
+    refineLandmarks: false,
+
     // Minimum confidence [0 - 1] for a face to be considered detected
     minDetectionConfidence: 0.5,
     

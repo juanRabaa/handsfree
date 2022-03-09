@@ -247,7 +247,7 @@ class Handsfree {
     this.debug.$video.height = this.config.setup.video.height
 
     // Run enable/disable methods on changed models
-    ;['hands', 'facemesh', 'pose', /*'handpose'*/, 'weboji'].forEach(model => {
+    ;['hands', 'facemesh', 'pose', /*'handpose',*/ 'weboji'].forEach(model => {
       let wasEnabled = this.model[model].enabled
       this.config[model] = this.model[model].config = merge({}, this.model[model].config, config[model])
 
@@ -406,7 +406,7 @@ class Handsfree {
     // Render video behind everything else
     // - Note: Weboji uses its own camera
     if (this.isDebugging) {
-      const isUsingCamera = ['hands', 'pose', /*'handpose'*/, 'facemesh'].find(model => {
+      const isUsingCamera = ['hands', 'pose', /*'handpose',*/ 'facemesh'].find(model => {
         if (this.model[model].enabled) {
           return model
         }
