@@ -163,7 +163,7 @@ export default {
     smoothLandmarks: true,
 
     // If true it also generates a segmentation map
-    enableSegmentation: false,
+    enableSegmentation: true,
     // Helps reduce jitter over multiple frames if true
     smoothSegmentation: true,
 

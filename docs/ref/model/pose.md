@@ -126,6 +126,31 @@ handsfree.data.pose.poseWorldLandmarks[0].z
 handsfree.data.pose.poseWorldLandmarks[0].visibility
 ```
 
+### `.segmentationMask`
+
+In addition to the landmarks you can also extract the pixels that make up the detected person, this is called segmentation. `.segmentationMask` is of type `ImageBitmap` with the same dimensions as the video stream, which you can use to copy onto a canvas:
+
+```js
+canvas = document.querySelector('#myCanvas')
+
+handsfree = new Handsfree({pose: {
+  enabled: true,
+  enableSegmentation: true
+}})
+
+handsfree.use('greenscreen', data => {
+  if (!data.pose) return
+
+  canvas.clearRect(0, 0, handsfree.debug.$video.width, handsfree.debug.$video.height)
+  canvas.image(data.pose.segmentationMask, 0, 0)
+})
+```
+
+<video src="https://google.github.io/mediapipe/images/mobile/pose_segmentation.mp4" muted autoplay loop></video>
+<br>
+([video source](https://google.github.io/mediapipe/solutions/pose.html#segmentation_mask))
+
+
 ### Examples of accessing the data
 
 ```js
