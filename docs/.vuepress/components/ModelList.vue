@@ -4,13 +4,13 @@ div.mt-md
 
   .row.align-top
     .col-6
-      Window(title="Model: MediaPipe Hands (2D)")
+      Window(title="Model: MediaPipe Hands")
         router-link(to='/ref/model/hands.html')
           img(src='https://media0.giphy.com/media/y4S6WFaCUWvqHL7UA8/giphy.gif')
         p
           router-link(to='/ref/model/hands.html') 📚 MediaPipe Hands documentation
         ul
-          li 21 2D hand landmarks per hand
+          li 22 3D hand landmarks per hand
           li Track up to 4 hands at once
           li Pinching states, hand pointers, and gestures
         div
@@ -22,24 +22,24 @@ div.mt-md
             Fa-Video
             | Try Hands
 
-    .col-6
-      Window(title="Model: TensorFlow Handpose (3D)")
-        router-link(to='/ref/model/handpose.html')
-          img(src='https://media1.giphy.com/media/qtDKTxsvD2fegGlRFr/giphy.gif')
-        p
-          router-link(to='/ref/model/handpose.html') 📚 TensorFlow Handpose documentation
-        ul
-          li 21 3D hand landmarks
-          li Can only track 1 hand at a time
-          li 📅 Extra helpers and plugins coming soon
-        div
-          HandsfreeToggle.full-width.handsfree-hide-when-started-without-handpose(text-off='Try Handpose' text-on='Stop Handpose' :opts='demo.handpose' @stop='stop("handpose")')
-          button.handsfree-show-when-started-without-handpose.handsfree-show-when-loading(disabled)
-            Fa-Spinner(spin)
-            | Loading...
-          button.handsfree-show-when-started-without-handpose.handsfree-hide-when-loading(@click='start("handpose")')
-            Fa-Video
-            | Try Handpose
+    //- .col-6
+    //-   Window(title="Model: TensorFlow Handpose (3D)")
+    //-     router-link(to='/ref/model/handpose.html')
+    //-       img(src='https://media1.giphy.com/media/qtDKTxsvD2fegGlRFr/giphy.gif')
+    //-     p
+    //-       router-link(to='/ref/model/handpose.html') 📚 TensorFlow Handpose documentation
+    //-     ul
+    //-       li 21 3D hand landmarks
+    //-       li Can only track 1 hand at a time
+    //-       li 📅 Extra helpers and plugins coming soon
+    //-     div
+    //-       HandsfreeToggle.full-width.handsfree-hide-when-started-without-handpose(text-off='Try Handpose' text-on='Stop Handpose' :opts='demo.handpose' @stop='stop("handpose")')
+    //-       button.handsfree-show-when-started-without-handpose.handsfree-show-when-loading(disabled)
+    //-         Fa-Spinner(spin)
+    //-         | Loading...
+    //-       button.handsfree-show-when-started-without-handpose.handsfree-hide-when-loading(@click='start("handpose")')
+    //-         Fa-Video
+    //-         | Try Handpose
 
     .col-6
       Window(title="Model: MediaPipe FaceMesh")
