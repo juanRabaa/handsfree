@@ -21,10 +21,10 @@ export default class HandsModel extends BaseModel {
     }
 
     // Load hands
-    this.loadDependency(`${this.handsfree.config.assetsPath}/@mediapipe/hands/hands.js`, () => {
+    this.loadDependency(`${this.handsfree.config.assetsPath}/node_modules/@mediapipe/hands/hands.js`, () => {
       // Configure model
       this.api = new window.Hands({locateFile: file => {
-        return `${this.handsfree.config.assetsPath}/@mediapipe/hands/${file}`
+        return `${this.handsfree.config.assetsPath}/node_modules/@mediapipe/hands/${file}`
       }})
       this.api.setOptions(this.handsfree.config.hands)
       this.api.onResults(results => this.dataReceived(results))

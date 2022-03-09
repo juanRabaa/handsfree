@@ -121,7 +121,13 @@ export default {
   // Hands model
   hands: {
     enabled: false,
+
+    // Model complexity [0, 1]
+    // Complexity of the hand landmark model: 0 or 1. Landmark accuracy as well as inference latency generally go up with the model complexity
+    modelComplexity: 1,
+    
     // The maximum number of hands to detect [0 - 4]
+    // Minimum confidence value ([0.0, 1.0]) from the hand detection model for the detection to be considered successful.
     maxNumHands: 2,
 
     // Minimum confidence [0 - 1] for a hand to be considered detected
